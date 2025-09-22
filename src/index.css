@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Supaya scroll ke section smooth */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: kasih sedikit offset biar tidak ketutup navbar */
+section {
+  scroll-margin-top: 80px; /* navbar kamu tinggi sekitar 64px-70px */
+}
