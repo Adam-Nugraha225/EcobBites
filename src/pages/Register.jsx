@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import NavbarAuth from "../components/NavbarAuth"; // 🔥 pakai navbar khusus auth
+import NavbarAuth from "../components/NavbarAuth";
+import heroImg from "../assets/Hero.png"; // ✅ import gambar dengan benar
 
 export default function Register() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NavbarAuth /> {/* ✅ Navbar khusus auth */}
+      <NavbarAuth />
       <div className="pt-24 flex">
         {/* Kiri - Banner */}
         <div className="hidden md:flex w-1/2 bg-green-600 text-white flex-col justify-center items-center p-10">
@@ -50,22 +51,16 @@ export default function Register() {
             EcoBites adalah platform edukasi yang mengajak masyarakat mengelola
             sisa makanan secara bijak agar tidak terbuang sia-sia.
           </p>
-          <img
-            src="src/assets/Hero.png"
-            alt="Food Waste Illustration"
-            className="mt-8 w-80"
-          />
+          <img src={heroImg} alt="Food Waste Illustration" className="mt-8 w-80" />
         </div>
 
         {/* Kanan - Form */}
         <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-6 md:px-16">
-          {/* Form tanpa tombol switch */}
           <form
             className="w-full max-w-md space-y-4"
             onSubmit={handleSubmit}
             noValidate
           >
-            {/* Input fields */}
             <div>
               <label className="block text-gray-700 text-sm mb-1">
                 Nama Lengkap
@@ -103,9 +98,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="block text-gray-700 text-sm mb-1">
-                Password
-              </label>
+              <label className="block text-gray-700 text-sm mb-1">Password</label>
               <input
                 type="password"
                 name="password"
@@ -152,9 +145,7 @@ export default function Register() {
           {/* Social login */}
           <div className="flex items-center my-6 w-full max-w-md">
             <div className="flex-grow h-px bg-gray-300"></div>
-            <span className="mx-3 text-gray-500 text-sm">
-              Atau Daftar Dengan
-            </span>
+            <span className="mx-3 text-gray-500 text-sm">Atau Daftar Dengan</span>
             <div className="flex-grow h-px bg-gray-300"></div>
           </div>
 
@@ -169,6 +160,14 @@ export default function Register() {
               <i className="fab fa-apple text-black"></i>
             </button>
           </div>
+
+          {/* Link ke Login */}
+          <p className="text-sm text-gray-600 mt-6">
+            Sudah punya akun?{" "}
+            <Link to="/login" className="text-green-600 hover:underline">
+              Masuk di sini
+            </Link>
+          </p>
         </div>
       </div>
     </div>

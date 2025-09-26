@@ -1,71 +1,68 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+// Landing
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Fitur from "./pages/Fitur";
 import Benefit from "./pages/Benefit";
 import Footer from "./components/Footer";
-import StreakTracker from "./components/StreakTracker";
-
-// ✅ Import halaman baru
 import ModulPage from "./pages/ModulPage";
 import ChallengePage from "./pages/ChallengePage";
 import ProgressPage from "./pages/ProgressPage";
-
-// ✅ Import TargetUser
 import TargetUser from "./pages/TargetUser";
+
+// Dashboard
+import Dashboard from "./pages/Dashboard";
+import DashboardHome from "./pages/DashboardHome";
+import DashboardModul from "./pages/DashboardModul";
+
+// Auth
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+// Protected
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
-    <div className="font-sans">
-      {/* ✅ Navbar di semua halaman */}
-      <Navbar />
+    <Routes>
+      {/* Landing */}
+      <Route
+        path="/"
+        element={
+          <>
+            <Navbar />
+            <section id="hero" className="pt-20"><Hero /></section>
+            <section id="fitur" className="pt-20"><Fitur /></section>
+            <section id="target" className="pt-20"><TargetUser /></section>
+            <section id="benefit" className="pt-20"><Benefit /></section>
+            <Footer />
+          </>
+        }
+      />
 
-      {/* ✅ Routing */}
-      <Routes>
-        {/* ✅ Landing Page */}
-        <Route
-          path="/"
-          element={
-            <>
-              {/* ✅ Hero Section */}
-              <section id="hero" className="pt-20">
-                <Hero />
-              </section>
+      {/* Auth Pages */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-              
+      {/* Landing pages biasa */}
+      <Route path="/modul" element={<ModulPage />} />
+      <Route path="/challenge" element={<ChallengePage />} />
+      <Route path="/progress" element={<ProgressPage />} />
 
-              {/* ✅ Fitur Section */}
-              <section id="fitur" className="pt-20">
-                <Fitur />
-              </section>
-
-              {/* ✅ Target User Section */}
-              <section id="target" className="pt-20">
-                <TargetUser />
-              </section>
-
-              {/* ✅ Benefit Section */}
-              <section id="benefit" className="pt-20">
-                <Benefit />
-              </section>
-            </>
-          }
-        />
-
-        {/* ✅ Halaman Modul Edukasi */}
-        <Route path="/modul" element={<ModulPage />} />
-
-        {/* ✅ Halaman Challenge & Badges */}
-        <Route path="/challenge" element={<ChallengePage />} />
-
-        {/* ✅ Halaman Progress Tracker */}
-        <Route path="/progress" element={<ProgressPage />} />
-      </Routes>
-
-      {/* ✅ Footer di semua halaman */}
-      <Footer />
-    </div>
+      {/* Dashboard pakai ProtectedRoute */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<DashboardHome />} />
+        <Route path="modul" element={<DashboardModul />} />
+      </Route>
+    </Routes>
   );
 }
